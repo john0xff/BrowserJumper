@@ -1,27 +1,50 @@
 /**
  * 
  */
-window.onload = function init() 
-{
-	var Game = {};
+	var webSocket = null;
 
-	Game.webSocket = null;
+	function connect() 
+	{
+           
+        if ('WebSocket' in window) 
+        {
+        	webSocket = new WebSocket('ws://' + window.location.host + '/BrowserJumper/websocket/connector');
+        } 
+        
+        webSocket.onopen = function () 
+        {
+        	console.log('Info: WebSocket connection opened.');
+        };
+        
+        webSocket.onmessage = function (serverData) 
+        {
+        	console.log('Received: ' + serverData.data);
+        };
+        
+        webSocket.onclose = function (event) 
+        {
+        	console.log('Info: WebSocket connection closed, Code: ' + event.code);
+        };
+    }
 	
-	Game.webSocket = new WebSocket('ws://' + window.location.host + '/BrowserJumper/websocket/connector');
+	function sendPing() 
+	{
+        if (webSocket != null) 
+        {
+        	message = "ping to server";
+            console.log('Sent: ' + message);
+            
+            webSocket.send(message);
+        } 
+    }
 	
-	Game.webSocket.onopen = function () 
+	function closeWebSocket()
 	{
-		console.log("onopen");
-		// Game.webSocket.send('ping');
+		if (webSocket != null) 
+		{
+			webSocket.close();
+			webSocket = null;
+        }
 	}
 
-	Game.webSocket.onclose = function () 
-	{
-		
-	}
-
-	Game.webSocket.onmessage = function () 
-	{
-		
-	}
-};
+	
