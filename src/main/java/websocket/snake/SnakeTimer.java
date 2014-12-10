@@ -87,6 +87,7 @@ public class SnakeTimer
 			try
 			{
 				snake.sendMessage(message);
+				System.out.println(message);
 			}
 			catch (IllegalStateException ise)
 			{

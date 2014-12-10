@@ -97,18 +97,22 @@ public class SnakeAnnotation
 		if ("west".equals(message))
 		{
 			snake.setDirection(Direction.WEST);
+			System.out.println("WEST");
 		}
 		else if ("north".equals(message))
 		{
 			snake.setDirection(Direction.NORTH);
+			System.out.println("NORTH");
 		}
 		else if ("east".equals(message))
 		{
 			snake.setDirection(Direction.EAST);
+			System.out.println("EAST");
 		}
 		else if ("south".equals(message))
 		{
 			snake.setDirection(Direction.SOUTH);
+			System.out.println("SOUTH");
 		}
 	}
 
