@@ -33,8 +33,8 @@ import javax.websocket.server.ServerEndpoint;
 public class SnakeAnnotation
 {
 
-	public static final int PLAYFIELD_WIDTH = 640;
-	public static final int PLAYFIELD_HEIGHT = 480;
+	public static final int PLAYFIELD_WIDTH = 200;
+	public static final int PLAYFIELD_HEIGHT = 200;
 	public static final int GRID_SIZE = 10;
 
 	private static final AtomicInteger snakeIds = new AtomicInteger(0);

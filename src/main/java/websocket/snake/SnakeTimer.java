@@ -70,6 +70,7 @@ public class SnakeTimer
 		{
 			Snake snake = iterator.next();
 			snake.update(SnakeTimer.getSnakes());
+			
 			sb.append(snake.getLocationsJson());
 			if (iterator.hasNext())
 			{

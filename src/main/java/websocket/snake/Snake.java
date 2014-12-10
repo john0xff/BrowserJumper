@@ -28,7 +28,7 @@ import javax.websocket.Session;
 public class Snake
 {
 
-	private static final int DEFAULT_LENGTH = 5;
+	private static final int DEFAULT_LENGTH = 0;
 
 	private final int id;
 	private final Session session;
@@ -125,6 +125,7 @@ public class Snake
 		{
 			boolean headCollision = id != snake.id && snake.getHead().equals(head);
 			boolean tailCollision = snake.getTail().contains(head);
+			
 			if (headCollision || tailCollision)
 			{
 				kill();

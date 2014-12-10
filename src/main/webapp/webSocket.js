@@ -18,8 +18,7 @@ function Snake() {
 Snake.prototype.draw = function(context) {
 	for ( var id in this.snakeBody) {
 		context.fillStyle = this.color;
-		context.fillRect(this.snakeBody[id].x, this.snakeBody[id].y,
-				Game.gridSize, Game.gridSize);
+		context.fillRect(this.snakeBody[id].x, this.snakeBody[id].y, Game.gridSize, Game.gridSize);
 	}
 };
 
@@ -65,19 +64,19 @@ Game.initialize = function() {
 
 // send direction of each client to server side and broadcast to different clients
 Game.setDirection = function(direction) {
+	
 	Game.direction = direction;
+	
+	// send new direction to server
 	Game.socket.send(direction);
+	
 	Console.log('Sent: Direction ' + direction);
 };
 
 Game.startGameLoop = function() {
-	if (window.webkitRequestAnimationFrame) {
+	if (window.requestAnimationFrame) {
 		Game.nextFrame = function() {
-			webkitRequestAnimationFrame(Game.run);
-		};
-	} else if (window.mozRequestAnimationFrame) {
-		Game.nextFrame = function() {
-			mozRequestAnimationFrame(Game.run);
+			requestAnimationFrame(Game.run);
 		};
 	} else {
 		Game.interval = setInterval(Game.run, 1000 / Game.fps);
@@ -95,7 +94,7 @@ Game.stopGameLoop = function() {
 };
 
 Game.draw = function() {
-	this.context.clearRect(0, 0, 640, 480);
+	this.context.clearRect(0, 0, 200, 200);
 	for ( var id in this.entities) {
 		this.entities[id].draw(this.context);
 	}
@@ -135,8 +134,6 @@ Game.run = (function() {
 Game.connect = (function(host) {
 	if ('WebSocket' in window) {
 		Game.socket = new WebSocket(host);
-	} else if ('MozWebSocket' in window) {
-		Game.socket = new MozWebSocket(host);
 	} else {
 		Console.log('Error: WebSocket is not supported by this browser.');
 		return;
@@ -148,7 +145,10 @@ Game.connect = (function(host) {
 		Console.log('Info: WebSocket connection opened.');
 		Console.log('Info: Press an arrow key to begin.');
 		Game.startGameLoop();
+		
+		// each 5 sec send ping msg to server
 		setInterval(function() {
+			
 			// Prevent server read timeout.
 			Game.socket.send('ping');
 		}, 5000);
