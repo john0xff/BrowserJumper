@@ -1,1 +1,19 @@
-..
+BrowserJumper
+=============
+
+Server Side (Map - one square)
+
+1. Get onMessage 
+	- position of each player
+	- color of each player
+
+2. ConcurrentHashMap for store all connected clients
+
+3. Redraw of client side needs to be 40 fps~
+
+4. Each onMessage from players need to be re send to all and redraw on the next frame update. 
+
+5. In what format I want to send data to client
+	- and how I want to read them
+
+6. JSON from server to client

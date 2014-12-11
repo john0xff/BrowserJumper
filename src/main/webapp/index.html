@@ -4,27 +4,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="map.css" />
+<link rel="stylesheet" type="text/css" href="client/css/container.css" />
 
 </head>
 
 <body>
-
-	 <div class="noscript">
-	 	<h2 style="color: #ff0000">
-	 	Seems your browser doesn't support Javascript! Websockets rely on Javascript being enabled. 
-	 	Please enable Javascript and reload this page!</h2>
-	 </div>
-    
-    <div style="float: left">
-        <canvas id="playground" width="200" height="200"/>
-    </div>
-    
-    <div id="console-container">
-        <div id="console"/>
-    </div>
-    
-	<script src="webSocket.js"></script>
+	
+	
+	<div id="game-area">
+		<canvas id="canvas"></canvas>
+	</div>
+	
+	<div id="console-container">
+		<div id="console"></div>
+	</div>
+		
+	
+	<div id="control-panel">
+		<button id="connect" onclick="openConnection();">openConnection via webSocket</button>
+		<button id="close" onclick="closeConnection();">closeConnection via webSocket</button><br><br>
+		
+		<input id="message" type="text" size="20">
+		<button id="sendMessage" onclick="sendMessage();">sendMessage()</button><br><br>
+		
+		<button id="consolePrintln" onclick="consolePrintln();">consolePrintln()</button><br><br>
+	</div>
+	
+	
+	<script src="server/webSocketConfig.js"></script>
+	<script src="client/js/console.js"></script>
+	<script src="client/js/player.js"></script>
+	<script src="client/js/map.js"></script>
+	<script src="client/js/main.js"></script>
+	
+<!-- 	<br>
+	<button onclick="onClickEvent('moveLeft')">moveLeft</button>
+	<button onclick="onClickEvent('moveUp')">moveUp</button>
+	<button onclick="onClickEvent('moveDown')">moveDown</button>
+	<button onclick="onClickEvent('moveRight')">moveRight</button> -->
 	
 </body>
 
