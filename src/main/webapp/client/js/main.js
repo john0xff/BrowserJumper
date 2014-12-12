@@ -111,6 +111,7 @@
 		player.setPosY(posY);
 	}*/
 	
+	
 	function keyEvents()
 	{
 		var posX = player.getPosX();
@@ -120,25 +121,37 @@
 		{
 			//console.log(posX);
 			posX -= player.getSpeed();
+			positionToServer(posX, posY);
 		}
 		
 		if (keys[38]) // up arrow
 		{
 			posY -= player.getSpeed();
+			positionToServer(posX, posY);
 		}
 
 		if (keys[39]) // right arrow
 		{
 			posX += player.getSpeed();
+			positionToServer(posX, posY);
 		}
 		
 		if (keys[40]) // down arrow
 		{
 			posY += player.getSpeed();
+			positionToServer(posX, posY);
 		}
 		
 		player.setPosX(posX);
 		player.setPosY(posY);
+		
+		
+	}
+	
+	function positionToServer(posX, posY)
+	{
+		message = "x " + posX + " " + "y " + posY;
+		connector.sendMessage(message);
 	}
 	
 	function checkWalls()

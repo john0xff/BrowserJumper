@@ -17,3 +17,10 @@ Server Side (Map - one square)
 	- and how I want to read them
 
 6. JSON from server to client
+
+----------
+
+When one player moves:
+- send new position to server
+- server needs to broadcast this message to all players as json with all players positions (even old once)
+- after receive each client will redraw canvas with new positions of each player
