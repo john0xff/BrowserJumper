@@ -65,73 +65,33 @@ public class WebSocketConnector
 	@OnMessage
 	public void onTextMessage(String message)
 	{
-		// System.out.println("onTextMessage -> " + message);
-
-//		ClientMessageTypes.readMessage(message);
-//		
-//		msg = message.split(" ");
-//
-//		System.out.println(msg[0] + " = " + msg[1]);
-//		System.out.println(msg[2] + " = " + msg[3]);
-//
-//		int x = Integer.valueOf(msg[1]);
-//		int y = Integer.valueOf(msg[3]);
-//		this.player.setPoint(new Point(x, y));
-
-		// System.out.println(message);
-
-		// System.out.println("x = ");
-		// System.out.println("y = ");
-
-		// broadcasting in new thrad
-
-	//	StringBuilder sb = new StringBuilder();
-
+		
+		// update position of player
+		
+		// update items on map
+		
+//		StringBuilder json = new StringBuilder();
+////		
+//		json.append(Json.as);
+////		json.append(Json.ob);
+////		/**
+////		 * prepare json for sent
+////		 */
 //		for (Iterator<Player> iterator = getPlayers().iterator(); iterator.hasNext();)
 //		{
 //			Player player = iterator.next();
-//			// sb.append(String.format("{\"id\": %d}", player.getId()));
-//			// sb.append(String.format("{\"x\": %d}", player.getPoint().x));
-//			// sb.append(String.format("{\"y\": %d}", player.getPoint().y));
-//
-//			// {"type": "update", "data" : [{"id":0,"body":[{"x": 10, "y": 140}]}]}
-//			//sb.append("{\"type\": \"update\", \"data\" : [{\"id,\":" + player.getId() + "\"body\":[{\"x\": " + x + ",\"y\": " + y + "}]}]}");
-//
-//			sb.append("{\"type\": \"update\", \"data\" : [{\"id\":0,\"body\":[{\"x\": 10, \"y\": 140}]}]}");
 //			
-//			// Snake snake = iterator.next();
-//			// sb.append(String.format("{\"id\": %d, \"color\": \"%s\"}", Integer.valueOf(snake.getId()),
-//			// snake.getHexColor()));
-//			// if (iterator.hasNext())
-//			// {
-//			// sb.append(',');
-//			// }
+//			
+//			json.append(Json.ob);
+//			json.append(Json.qt + "playerId" + Json.qt + Json.cn + Json.qt + player.getId() + Json.qt);
+//			json.append(Json.oe);
+//			
+//			if(iterator.hasNext())
+//			{
+//				json.append(Json.cm);
+//			}
 //		}
-		
-	//	sb.append("{\"type\": \"update\", \"data\" : [{\"id\":0,\"body\":[{\"x\": 10, \"y\": 140}]}]}");
-		
-		StringBuilder json = new StringBuilder();
-//		
-		json.append(Json.as);
-//		json.append(Json.ob);
-//		/**
-//		 * prepare json for sent
-//		 */
-		for (Iterator<Player> iterator = getPlayers().iterator(); iterator.hasNext();)
-		{
-			Player player = iterator.next();
-			
-			
-			json.append(Json.ob);
-			json.append(Json.qt + "playerId" + Json.qt + Json.cn + Json.qt + player.getId() + Json.qt);
-			json.append(Json.oe);
-			
-			if(iterator.hasNext())
-			{
-				json.append(Json.cm);
-			}
-		}
-		json.append(Json.ad);
+//		json.append(Json.ad);
 //		json.append(Json.oe);
 //		json.append(")");
 		
@@ -142,9 +102,12 @@ public class WebSocketConnector
 		{
 			Player player = iterator.next();
 			
+			if(this.player == player)
+				continue;
+			
 			try
 			{
-				player.getSession().getBasicRemote().sendText(json.toString());
+				player.getSession().getBasicRemote().sendText(message);
 			}
 			catch (Exception e)
 			{

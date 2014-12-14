@@ -34,10 +34,10 @@
         this.webSocket.onmessage = function(message) 
         {
     		
-    		var packet = JSON.parse(message.data);
+    		//var packet = JSON.parse(message.data);
     		
-    		console.log(packet);
-    		Console.println(packet);
+    		console.log(message.data);
+    		Console.println(message.data);
     		
 //    		switch (packet.type) 
 //    		{

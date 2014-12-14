@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import javax.websocket.Session;
 
+
 public class Player
 {
 	private final int id;
@@ -36,5 +37,15 @@ public class Player
 		this.point = point;
 	}
 	
-	
+	public synchronized String getLocationsJson()
+	{
+		StringBuilder sb = new StringBuilder();
+//		sb.append(String.format("{\"x\": %d, \"y\": %d}", Integer.valueOf(head.x), Integer.valueOf(head.y)));
+//		for (Location location : tail)
+//		{
+//			sb.append(',');
+//			sb.append(String.format("{\"x\": %d, \"y\": %d}", Integer.valueOf(location.x), Integer.valueOf(location.y)));
+//		}
+		return String.format("{\"id\":%d,\"body\":[%s]}", Integer.valueOf(id), sb.toString());
+	}
 }
