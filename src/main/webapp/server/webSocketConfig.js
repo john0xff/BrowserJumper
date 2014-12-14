@@ -35,38 +35,40 @@
         {
     		
     		var packet = JSON.parse(message.data);
-    		console.log(packet.data);
     		
-    		switch (packet.type) 
-    		{
-    			// {"type": "update", "data" : [{"id":0,"body":[{"x": 10, "y": 140}]}]}
-	    		case 'update':
-	    			for (var i = 0; i < packet.data.length; i++) 
-	    			{
-	    				//Game.updateSnake(packet.data[i].id, packet.data[i].body);
-	    			}
-	    			break;
-	    		
-	    		case 'join':
-	    			for (var j = 0; j < packet.data.length; j++) 
-	    			{
-	    				Game.addSnake(packet.data[j].id, packet.data[j].color);
-	    			}
-	    			break;
-	    		
-	    		case 'leave':
-	    			Game.removeSnake(packet.id);
-	    			break;
-	    		
-	    		case 'dead':
-	    			Console.log('Info: Your snake is dead, bad luck!');
-	    			Game.direction = 'none';
-	    			break;
-	    		
-	    		case 'kill':
-	    			Console.log('Info: Head shot!');
-	    			break;
-    		}
+    		console.log(packet);
+    		Console.println(packet);
+    		
+//    		switch (packet.type) 
+//    		{
+//    			// {"type": "update", "data" : [{"id":0,"body":[{"x": 10, "y": 140}]}]}
+//	    		case 'update':
+//	    			for (var i = 0; i < packet.data.length; i++) 
+//	    			{
+//	    				//Game.updateSnake(packet.data[i].id, packet.data[i].body);
+//	    			}
+//	    			break;
+//	    		
+//	    		case 'join':
+//	    			for (var j = 0; j < packet.data.length; j++) 
+//	    			{
+//	    				Game.addSnake(packet.data[j].id, packet.data[j].color);
+//	    			}
+//	    			break;
+//	    		
+//	    		case 'leave':
+//	    			Game.removeSnake(packet.id);
+//	    			break;
+//	    		
+//	    		case 'dead':
+//	    			Console.log('Info: Your snake is dead, bad luck!');
+//	    			Game.direction = 'none';
+//	    			break;
+//	    		
+//	    		case 'kill':
+//	    			Console.log('Info: Head shot!');
+//	    			break;
+//    		}
     	};
         
         

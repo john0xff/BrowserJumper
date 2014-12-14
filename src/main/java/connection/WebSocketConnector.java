@@ -15,6 +15,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import utils.Json;
+
 @ServerEndpoint(value = "/websocket/connector")
 public class WebSocketConnector
 {
@@ -65,14 +67,16 @@ public class WebSocketConnector
 	{
 		// System.out.println("onTextMessage -> " + message);
 
-		msg = message.split(" ");
-
-		System.out.println(msg[0] + " = " + msg[1]);
-		System.out.println(msg[2] + " = " + msg[3]);
-
-		int x = Integer.valueOf(msg[1]);
-		int y = Integer.valueOf(msg[3]);
-		this.player.setPoint(new Point(x, y));
+//		ClientMessageTypes.readMessage(message);
+//		
+//		msg = message.split(" ");
+//
+//		System.out.println(msg[0] + " = " + msg[1]);
+//		System.out.println(msg[2] + " = " + msg[3]);
+//
+//		int x = Integer.valueOf(msg[1]);
+//		int y = Integer.valueOf(msg[3]);
+//		this.player.setPoint(new Point(x, y));
 
 		// System.out.println(message);
 
@@ -81,7 +85,7 @@ public class WebSocketConnector
 
 		// broadcasting in new thrad
 
-		StringBuilder sb = new StringBuilder();
+	//	StringBuilder sb = new StringBuilder();
 
 //		for (Iterator<Player> iterator = getPlayers().iterator(); iterator.hasNext();)
 //		{
@@ -104,15 +108,43 @@ public class WebSocketConnector
 //			// }
 //		}
 		
-		sb.append("{\"type\": \"update\", \"data\" : [{\"id\":0,\"body\":[{\"x\": 10, \"y\": 140}]}]}");
+	//	sb.append("{\"type\": \"update\", \"data\" : [{\"id\":0,\"body\":[{\"x\": 10, \"y\": 140}]}]}");
 		
+		StringBuilder json = new StringBuilder();
+//		
+		json.append(Json.as);
+//		json.append(Json.ob);
+//		/**
+//		 * prepare json for sent
+//		 */
 		for (Iterator<Player> iterator = getPlayers().iterator(); iterator.hasNext();)
 		{
 			Player player = iterator.next();
-
+			
+			
+			json.append(Json.ob);
+			json.append(Json.qt + "playerId" + Json.qt + Json.cn + Json.qt + player.getId() + Json.qt);
+			json.append(Json.oe);
+			
+			if(iterator.hasNext())
+			{
+				json.append(Json.cm);
+			}
+		}
+		json.append(Json.ad);
+//		json.append(Json.oe);
+//		json.append(")");
+		
+		/**
+		 * sent json for all connected players
+		 */
+		for (Iterator<Player> iterator = getPlayers().iterator(); iterator.hasNext();)
+		{
+			Player player = iterator.next();
+			
 			try
 			{
-				player.getSession().getBasicRemote().sendText(sb.toString());
+				player.getSession().getBasicRemote().sendText(json.toString());
 			}
 			catch (Exception e)
 			{

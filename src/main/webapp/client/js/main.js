@@ -9,6 +9,7 @@
 	var player = new Player();
 	var map = new Map();
 	//var console = new Console();
+	var messageType = new MessageType();
 	
 	var keys = [];
 	
@@ -148,9 +149,14 @@
 		
 	}
 	
+	/**
+	 * Server needs to know what type of message it is.
+	 * In other case webSocket throws exception and connection is closed.
+	 */
 	function positionToServer(posX, posY)
 	{
-		message = "x " + posX + " " + "y " + posY;
+		
+		message = MessageType.POSITION + " x " + posX + " " + "y " + posY;
 		connector.sendMessage(message);
 	}
 	
@@ -189,13 +195,4 @@
 		player.setPosX(posX);
 		player.setPosY(posY);
 	}
-	
-	///////////////////////////////
-	///// Console
-	//////////////////////////////
-	
-	
-	
-	
-	
 	
